@@ -21,5 +21,10 @@ class vector:
 
 	def __sub__(self,vec):
 		return vector(self.x-vec.x,self.y-vec.y)
+
+	def mul(self,other):
+		return vector(self.x*other,self.y*other)
 	def __mul__(self,vec):
 		return vector(self.x*vec,self.y*vec)
+	def __truediv__(self,vec):
+		return vector(self.x/vec,self.y/vec)
