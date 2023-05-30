@@ -8,10 +8,10 @@ WIN = pygame.display.set_mode((WIDTH,HEIGHT))
 
 
 
-dt = 1/30
+dt = 1/60
 
 WHITE = (255,255,255)
-RED = (255,0,0)
+RED = (230,0,0)
 
 def draw_win():
 	WIN.fill(WHITE)
@@ -24,12 +24,11 @@ def main():
 	t=0
 	x = []
 	tm = []
-	pos = vector(450,250)
-	spr1p = vector(450,150)
-	spr2p = vector(150,250)
-	spr1 = Spring(1e2,spr1p,0)
-	spr2 = Spring(1e2,spr2p,0)
-	circ = circle(pos,1,20,dt,s=[spr1,spr2])
+	pos = vector(250,150)
+	spr1p = vector(450,250)
+	spr1 = Spring(1e2,10,spr1p,1)
+	circ = circle(pos,1,20,dt,a=[spr1])
+
 
 	while run:
 		clock.tick(1/dt)
@@ -40,12 +39,11 @@ def main():
 
 		pygame.draw.circle(WIN,RED, (circ.pos.x,circ.pos.y), circ.r)
 		pygame.draw.rect(WIN,(0,255,0),pygame.Rect(spr1p.x,spr1p.y,20,20))
-		pygame.draw.rect(WIN,(0,255,0),pygame.Rect(spr2p.x,spr2p.y,20,20))
 		pygame.display.flip()
 		circ.update()
-		x.append(circ.pos.y)
+		x.append(circ.pos.x)
 		t += dt
-		tm.append(circ.pos.x)
+		tm.append(t)
 	plt.plot(tm,x)
 	plt.show()
 
